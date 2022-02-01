@@ -3,26 +3,50 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"net"
+	"os"
+	"os/signal"
 
-	"app.ir/internal/handler"
 	"app.ir/pkg/logHandler"
+	pb "app.ir/proto"
+	"google.golang.org/grpc"
 )
 
 var (
 	port = flag.Int("port", 50051, "The server port")
 )
 
+type Server struct {
+	pb.EstimateServer
+}
+
 func main() {
 
 	flag.Parse()
 
-	server, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		logHandler.LogError(err.Error())
 	}
 
-	handler.RunHandler(server)
-	logHandler.Log(fmt.Sprintf("server listening at %v", server.Addr()))
+	opts := []grpc.ServerOption{}
+	s := grpc.NewServer(opts...)
+	pb.RegisterEstimateServer(s, &Server{})
 
+	go func() {
+		if err := s.Serve(listener); err != nil {
+			log.Fatalf("failed to serve %v", err)
+		}
+	}()
+	logHandler.Log(fmt.Sprintf("server listening at %v", listener.Addr()))
+
+	c := make(chan os.Signal)
+	signal.Notify(c, os.Interrupt)
+	<-c
+	fmt.Println("\nStopping the server... ")
+	s.Stop()
+	listener.Close()
+	fmt.Println("Closing MongoDB conncetion")
+	fmt.Println("Done")
 }
