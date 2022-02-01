@@ -1,4 +1,4 @@
-module app.ir/service/api/es
+module app.ir
 
 go 1.17
 

@@ -7,7 +7,7 @@ import (
 	"log"
 	"net"
 
-	pb "app.ir/service/api/es/proto"
+	pb "app.ir/proto"
 
 	"google.golang.org/grpc"
 )
@@ -17,12 +17,28 @@ var (
 )
 
 type server struct {
-	pb.GreeterServer
+	pb.EstimateServer
 }
 
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("Received: %v", in.GetName())
-	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
+func (s *server) StoreUserSegmantation(ctx context.Context, in *pb.UserSegmantRequest) (*pb.UserSegmantResponse, error) {
+	log.Printf("New user added: %v", in.GetUser())
+	return &pb.UserSegmantResponse{
+		Message: "New user added",
+		Success: "true",
+	}, nil
+}
+
+func (s *server) ShowUserInSegmant(ctx context.Context, in *pb.SegmantRequest) (*pb.SegmantResponse, error) {
+	log.Printf("We should query on Segment: %d", in.GetSegmant())
+	return &pb.SegmantResponse{
+		Users: []*pb.User{
+			{
+				User:    "12",
+				Segmant: "Football",
+			},
+		},
+		Success: "true",
+	}, nil
 }
 
 func main() {
@@ -32,7 +48,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
+	pb.RegisterEstimateServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

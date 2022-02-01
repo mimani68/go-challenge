@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "proto/";
+
+package proto;
+
+service Estimate {
+  rpc StoreUserSegmantation (UserSegmantRequest) returns (UserSegmantResponse) {}
+  rpc ShowUserInSegmant (SegmantRequest) returns (SegmantResponse) {}
+}
+
+message User {
+  string user = 1;
+  string segmant = 2;
+}
+
+message UserSegmantRequest {
+  string user = 1;
+  string segmant = 2;
+}
+
+message UserSegmantResponse {
+  string success = 1;
+  string message = 2;
+}
+
+message SegmantRequest {
+  string segmant = 1;
+}
+
+message SegmantResponse {
+  string success = 1;
+  repeated User users = 2;
+}
