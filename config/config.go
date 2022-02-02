@@ -1,9 +1,10 @@
 package config
 
 import (
-	"gopkg.in/yaml.v2"
 	"log"
 	"os"
+
+	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
@@ -18,6 +19,7 @@ type Config struct {
 		ServerHost string `yaml:"host"`
 		ServerPort string `yaml:"port"`
 	} `yaml:"server"`
+	CronJobTime int
 }
 
 func NewConfig() *Config {
