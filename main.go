@@ -37,9 +37,9 @@ func main() {
 
 	segmentRepo := repository.CreateSegmentRepository(*cfg, dbInstance)
 	segmentService := service.NewSegmentService(*segmentRepo)
-	segmentHandler := handler.SegmentHandler(segmentService)
+	segmentHandler := handler.NewSegmentHandler(segmentService)
 
 	go job.RunJobs(cfg.Server.CronJobTime)
 
-	app.RunServer(listener, segmentHandler)
+	app.RunServer(listener, *segmentHandler)
 }

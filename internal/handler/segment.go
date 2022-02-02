@@ -22,11 +22,11 @@ func (s *SegmentHandler) StoreUserSegmantation(ctx context.Context, in *pb.UserS
 	//
 	// FIXME: Store in Mongodb
 	//
-	// return &pb.UserSegmantResponse{
-	// 	Message: "New user added",
-	// 	Success: "true",
-	// }, nil
-	return s.StoreUserSegmantation(ctx, in)
+	return &pb.UserSegmantResponse{
+		Message: "New user added",
+		Success: "true",
+	}, nil
+	// return s.StoreUserSegmantation(ctx, in)
 }
 
 func (s *SegmentHandler) ShowUserInSegmant(ctx context.Context, in *pb.SegmantRequest) (*pb.SegmantResponse, error) {

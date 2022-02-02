@@ -7,12 +7,14 @@ import (
 	"os"
 	"os/signal"
 
+	"app.ir/internal/handler"
 	"app.ir/pkg/logHandler"
 	pb "app.ir/proto"
 	"google.golang.org/grpc"
 )
 
-func RunServer(listener net.Listener, segmentHandler pb.EstimateServer) {
+func RunServer(listener net.Listener, segmentHandler handler.SegmentHandler) {
+	// func RunServer(listener net.Listener, segmentHandler pb.EstimateServer) {
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
 	pb.RegisterEstimateServer(s, segmentHandler)

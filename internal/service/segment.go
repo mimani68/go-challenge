@@ -22,7 +22,7 @@ func NewSegmentService(repo repository.SegmentRepository) SegmentService {
 	return &segmentService{repo}
 }
 
-func (u *segmentService) StoreUserSegmantation(ctx context.Context, pb *pb.UserSegmantRequest) (*pb.UserSegmantResponse, error) {
+func (u *segmentService) StoreUserSegmantation(ctx context.Context, pb_request *pb.UserSegmantRequest) (*pb.UserSegmantResponse, error) {
 	// a := u.
 	return &pb.UserSegmantResponse{
 		Message: "New user added",
@@ -30,28 +30,19 @@ func (u *segmentService) StoreUserSegmantation(ctx context.Context, pb *pb.UserS
 	}, nil
 }
 
-func (u *segmentService) ShowUserInSegmant(ctx context.Context, pb *pb.UserSegmantRequest) (*pb.SegmantResponse, error) {
+func (u *segmentService) ShowUserInSegmant(ctx context.Context, pb_request *pb.SegmantRequest) (*pb.SegmantResponse, error) {
 	// return u.Repository.GetSegments(ctx, skip, limit)
-	fmt.Println("Need implemention")
+	return &pb.SegmantResponse{
+		Users: []*pb.User{
+			{
+				User:    "12",
+				Segmant: "Football",
+			},
+		},
+		Success: "true",
+	}, nil
 }
 
 func (u *segmentService) mustEmbedUnimplementedEstimateServer() {
-	// return u.Repository.GetSegmentById(ctx, id)
 	fmt.Println("Need implemention")
 }
-
-// type SegmentService interface {
-// 	HelloService(context.Context) (string, error)
-// }
-
-// type segmentService struct {
-// 	repo repository.SegmentRepository
-// }
-
-// func NewSegmentService(repo repository.SegmentRepository) SegmentService {
-// 	return &segmentService{repo}
-// }
-
-// func (u *segmentService) HelloService(ctx context.Context) (string, error) {
-// 	return "salam", nil
-// }
