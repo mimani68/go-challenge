@@ -58,7 +58,7 @@ func (c *segmentServiceClient) ShowUserInSegmant(ctx context.Context, in *Segman
 type SegmentServiceServer interface {
 	StoreUserSegmantation(context.Context, *UserSegmantRequest) (*UserSegmantResponse, error)
 	ShowUserInSegmant(context.Context, *SegmantRequest) (*SegmantResponse, error)
-	mustEmbedUnimplementedSegmentServiceServer()
+	// mustEmbedUnimplementedSegmentServiceServer()
 }
 
 // UnimplementedSegmentServiceServer must be embedded to have forward compatible implementations.

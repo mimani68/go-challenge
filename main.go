@@ -11,7 +11,7 @@ import (
 	"app.ir/internal/handler"
 	"app.ir/internal/job"
 	"app.ir/internal/service"
-	app "app.ir/internal/transport/grpc"
+	"app.ir/internal/transport/grpc"
 	"app.ir/pkg/logHandler"
 )
 
@@ -40,5 +40,5 @@ func main() {
 
 	go job.RunJobs(cfg.Server.CronJobTime)
 
-	app.RunServer(listener, segmentHandler)
+	grpc.RunServer(listener, segmentHandler)
 }
