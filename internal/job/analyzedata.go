@@ -3,5 +3,5 @@ package job
 import "fmt"
 
 func analyzeData() {
-	fmt.Println("Data analyzing job started")
+	fmt.Println("[jobs] Data analyzing job started")
 }

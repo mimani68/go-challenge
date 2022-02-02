@@ -8,6 +8,8 @@ import (
 	"os"
 	"os/signal"
 
+	"app.ir/internal/job"
+	app "app.ir/internal/transport/grpc"
 	"app.ir/pkg/logHandler"
 	pb "app.ir/proto"
 	"google.golang.org/grpc"
@@ -17,22 +19,18 @@ var (
 	port = flag.Int("port", 50051, "The server port")
 )
 
-type Server struct {
-	pb.EstimateServer
-}
-
 func main() {
 
 	flag.Parse()
 
-	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+	listener, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", *port))
 	if err != nil {
 		logHandler.LogError(err.Error())
 	}
 
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
-	pb.RegisterEstimateServer(s, &Server{})
+	pb.RegisterEstimateServer(s, &app.Server{})
 
 	go func() {
 		if err := s.Serve(listener); err != nil {
@@ -40,6 +38,8 @@ func main() {
 		}
 	}()
 	logHandler.Log(fmt.Sprintf("server listening at %v", listener.Addr()))
+
+	job.RunJobs()
 
 	c := make(chan os.Signal)
 	signal.Notify(c, os.Interrupt)

@@ -1,4 +1,4 @@
-package handler
+package grpc
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 )
 
 func (s *Server) StoreUserSegmantation(ctx context.Context, in *pb.UserSegmantRequest) (*pb.UserSegmantResponse, error) {
-	log.Printf("New user added: %v", in.GetUser())
+	log.Printf("New user added: %s", in.GetUser())
 	return &pb.UserSegmantResponse{
 		Message: "New user added",
 		Success: "true",
@@ -16,7 +16,7 @@ func (s *Server) StoreUserSegmantation(ctx context.Context, in *pb.UserSegmantRe
 }
 
 func (s *Server) ShowUserInSegmant(ctx context.Context, in *pb.SegmantRequest) (*pb.SegmantResponse, error) {
-	log.Printf("We should query on Segment: %d", in.GetSegmant())
+	log.Printf("We should query on Segment: %s", in.GetSegmant())
 	return &pb.SegmantResponse{
 		Users: []*pb.User{
 			{
