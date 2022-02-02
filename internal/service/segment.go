@@ -7,20 +7,7 @@ import (
 	pb "app.ir/proto"
 )
 
-var db = []*pb.User{
-	{
-		User:    "1",
-		Segmant: "Football",
-	},
-	{
-		User:    "2",
-		Segmant: "Football",
-	},
-	{
-		User:    "3",
-		Segmant: "Vollybal",
-	},
-}
+var db = []*pb.User{}
 
 type segmentService struct {
 	repo repository.SegmentRepository
