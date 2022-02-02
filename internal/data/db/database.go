@@ -12,8 +12,6 @@ import (
 
 type Database struct {
 	Segments *mongo.Collection
-	Threads  *mongo.Collection
-	Posts    *mongo.Collection
 }
 
 func NewDatabase(cfg config.Config, db *mongo.Database) Database {

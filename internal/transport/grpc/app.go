@@ -12,14 +12,10 @@ import (
 	"google.golang.org/grpc"
 )
 
-type Server struct {
-	pb.EstimateServer
-}
-
-func RunServer(listener net.Listener) {
+func RunServer(listener net.Listener, segmentHandler pb.EstimateServer) {
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
-	pb.RegisterEstimateServer(s, &Server{})
+	pb.RegisterEstimateServer(s, segmentHandler)
 
 	go func() {
 		if err := s.Serve(listener); err != nil {
