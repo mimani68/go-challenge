@@ -3,14 +3,15 @@ package repository
 import (
 	"context"
 	"fmt"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 	"grpcImageboard/config"
 	"grpcImageboard/data/db"
 	"grpcImageboard/domain"
 	"sort"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type postRepository struct {
@@ -62,7 +63,7 @@ func (r *postRepository) GetPostById(ctx context.Context, id string) (*domain.Po
 }
 
 func (r *postRepository) CreatePost(ctx context.Context, post *domain.Post) (string, error) {
-	session, err := r.db.Boards.Database().Client().StartSession()
+	session, err := r.db.Segments.Database().Client().StartSession()
 	if err != nil {
 		return "", err
 	}

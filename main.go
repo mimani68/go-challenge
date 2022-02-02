@@ -3,16 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"net"
-	"os"
-	"os/signal"
 
+	"app.ir/config"
+	"app.ir/internal/data/db"
 	"app.ir/internal/job"
 	app "app.ir/internal/transport/grpc"
 	"app.ir/pkg/logHandler"
-	pb "app.ir/proto"
-	"google.golang.org/grpc"
 )
 
 var (
@@ -23,32 +20,17 @@ func main() {
 
 	flag.Parse()
 
+	cfg := config.NewConfig()
+
 	listener, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", *port))
 	if err != nil {
 		logHandler.LogError(err.Error())
 	}
 
-	// db := db.NewDatabase()
+	client, connect, disconnect := db.Open(fmt.Sprintf("%s/%s", cfg.Database.DbUri, cfg.Database.DbName))
+	defer db.Close(client, connect, disconnect)
 
-	opts := []grpc.ServerOption{}
-	s := grpc.NewServer(opts...)
-	pb.RegisterEstimateServer(s, &app.Server{})
+	go job.RunJobs(cfg.Server.CronJobTime)
 
-	go func() {
-		if err := s.Serve(listener); err != nil {
-			log.Fatalf("failed to serve %v", err)
-		}
-	}()
-	logHandler.Log(fmt.Sprintf("server listening at %v", listener.Addr()))
-
-	job.RunJobs()
-
-	c := make(chan os.Signal)
-	signal.Notify(c, os.Interrupt)
-	<-c
-	fmt.Println("\nStopping the server... ")
-	s.Stop()
-	listener.Close()
-	fmt.Println("Closing MongoDB conncetion")
-	fmt.Println("Done")
+	app.RunServer(listener)
 }

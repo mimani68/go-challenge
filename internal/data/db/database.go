@@ -11,16 +11,14 @@ import (
 )
 
 type Database struct {
-	Boards  *mongo.Collection
-	Threads *mongo.Collection
-	Posts   *mongo.Collection
+	Segments *mongo.Collection
+	Threads  *mongo.Collection
+	Posts    *mongo.Collection
 }
 
 func NewDatabase(cfg config.Config, db *mongo.Database) Database {
 	return Database{
-		Boards:  db.Collection(cfg.Database.CollBoards),
-		Threads: db.Collection(cfg.Database.CollThreads),
-		Posts:   db.Collection(cfg.Database.CollPosts),
+		Segments: db.Collection(cfg.Database.CollSegments),
 	}
 }
 

@@ -9,17 +9,15 @@ import (
 
 type Config struct {
 	Database struct {
-		DbUri       string `yaml:"uri"`
-		DbName      string `yaml:"name"`
-		CollBoards  string `yaml:"collection_boards"`
-		CollThreads string `yaml:"collection_threads"`
-		CollPosts   string `yaml:"collection_posts"`
+		DbUri        string `yaml:"uri"`
+		DbName       string `yaml:"name"`
+		CollSegments string `yaml:"collection_segments"`
 	} `yaml:"database"`
 	Server struct {
-		ServerHost string `yaml:"host"`
-		ServerPort string `yaml:"port"`
+		ServerHost  string `yaml:"host"`
+		ServerPort  string `yaml:"port"`
+		CronJobTime int    `yaml:"cron_job_interval"`
 	} `yaml:"server"`
-	CronJobTime int
 }
 
 func NewConfig() *Config {

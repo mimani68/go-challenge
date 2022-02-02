@@ -6,8 +6,8 @@ import (
 	"github.com/go-co-op/gocron"
 )
 
-func RunJobs() {
+func RunJobs(interval int) {
 	s := gocron.NewScheduler(time.Local)
-	s.Every( /* config.Config.CronJobTime */ 5).Seconds().Do(analyzeData)
+	s.Every(interval).Seconds().Do(analyzeData)
 	s.StartAsync()
 }
