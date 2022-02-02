@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  private_network: 
+    
+services:
+
+  db:
+    image: mongo:5
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - db:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - private_network
+
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - private_network
+
+volumes:
+  db:

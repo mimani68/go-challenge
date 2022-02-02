@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	port = flag.Int("port", 50051, "The server port")
+	port = flag.Int("port", 3000, "The server port")
 )
 
 func main() {
@@ -27,6 +27,8 @@ func main() {
 	if err != nil {
 		logHandler.LogError(err.Error())
 	}
+
+	// db := db.NewDatabase()
 
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
