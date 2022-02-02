@@ -18,6 +18,7 @@ message User {
 message UserSegmantRequest {
   string user = 1;
   string segmant = 2;
+  string date = 3;
 }
 
 message UserSegmantResponse {
