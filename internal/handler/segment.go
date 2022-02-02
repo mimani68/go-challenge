@@ -23,3 +23,7 @@ func (s *segmentHandler) StoreUserSegmantation(ctx context.Context, in *pb.UserS
 func (s *segmentHandler) ShowUserInSegmant(ctx context.Context, in *pb.SegmantRequest) (*pb.SegmantResponse, error) {
 	return s.srv.ShowUserInSegmant(ctx, in)
 }
+
+func (s *segmentHandler) Estimate(ctx context.Context, in *pb.SegmantRequest) (*pb.EstimateResponse, error) {
+	return s.srv.Estimate(ctx, in)
+}

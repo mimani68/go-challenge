@@ -7,6 +7,7 @@ package proto;
 service SegmentService {
   rpc StoreUserSegmantation (UserSegmantRequest) returns (UserSegmantResponse) {}
   rpc ShowUserInSegmant (SegmantRequest) returns (SegmantResponse) {}
+  rpc Estimate (SegmantRequest) returns (EstimateResponse) {}
 }
 
 message User {
@@ -20,7 +21,7 @@ message UserSegmantRequest {
 }
 
 message UserSegmantResponse {
-  string success = 1;
+  bool success = 1;
   string message = 2;
 }
 
@@ -29,6 +30,11 @@ message SegmantRequest {
 }
 
 message SegmantResponse {
-  string success = 1;
+  bool success = 1;
   repeated User users = 2;
+}
+
+message EstimateResponse {
+  bool success = 1;
+  int32 count = 2;
 }

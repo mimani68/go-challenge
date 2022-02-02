@@ -24,7 +24,7 @@ func (u *segmentService) StoreUserSegmantation(ctx context.Context, pb_request *
 	})
 	return &pb.UserSegmantResponse{
 		Message: "New user added",
-		Success: "true",
+		Success: true,
 	}, nil
 }
 
@@ -37,6 +37,17 @@ func (u *segmentService) ShowUserInSegmant(ctx context.Context, pb_request *pb.S
 	}
 	return &pb.SegmantResponse{
 		Users:   result,
-		Success: "true",
+		Success: true,
+	}, nil
+}
+
+func (u *segmentService) Estimate(ctx context.Context, pb_request *pb.SegmantRequest) (*pb.EstimateResponse, error) {
+	result := map[string]int32{}
+	for _, value := range db {
+		result[value.Segmant] += 1
+	}
+	return &pb.EstimateResponse{
+		Success: true,
+		Count:   result[pb_request.Segmant],
 	}, nil
 }

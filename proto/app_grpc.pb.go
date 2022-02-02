@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type SegmentServiceClient interface {
 	StoreUserSegmantation(ctx context.Context, in *UserSegmantRequest, opts ...grpc.CallOption) (*UserSegmantResponse, error)
 	ShowUserInSegmant(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*SegmantResponse, error)
+	Estimate(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*EstimateResponse, error)
 }
 
 type segmentServiceClient struct {
@@ -52,12 +53,22 @@ func (c *segmentServiceClient) ShowUserInSegmant(ctx context.Context, in *Segman
 	return out, nil
 }
 
+func (c *segmentServiceClient) Estimate(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*EstimateResponse, error) {
+	out := new(EstimateResponse)
+	err := c.cc.Invoke(ctx, "/proto.SegmentService/Estimate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SegmentServiceServer is the server API for SegmentService service.
 // All implementations must embed UnimplementedSegmentServiceServer
 // for forward compatibility
 type SegmentServiceServer interface {
 	StoreUserSegmantation(context.Context, *UserSegmantRequest) (*UserSegmantResponse, error)
 	ShowUserInSegmant(context.Context, *SegmantRequest) (*SegmantResponse, error)
+	Estimate(context.Context, *SegmantRequest) (*EstimateResponse, error)
 	// mustEmbedUnimplementedSegmentServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedSegmentServiceServer) StoreUserSegmantation(context.Context, 
 }
 func (UnimplementedSegmentServiceServer) ShowUserInSegmant(context.Context, *SegmantRequest) (*SegmantResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowUserInSegmant not implemented")
+}
+func (UnimplementedSegmentServiceServer) Estimate(context.Context, *SegmantRequest) (*EstimateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Estimate not implemented")
 }
 func (UnimplementedSegmentServiceServer) mustEmbedUnimplementedSegmentServiceServer() {}
 
@@ -120,6 +134,24 @@ func _SegmentService_ShowUserInSegmant_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SegmentService_Estimate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SegmantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentServiceServer).Estimate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.SegmentService/Estimate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentServiceServer).Estimate(ctx, req.(*SegmantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SegmentService_ServiceDesc is the grpc.ServiceDesc for SegmentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var SegmentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ShowUserInSegmant",
 			Handler:    _SegmentService_ShowUserInSegmant_Handler,
+		},
+		{
+			MethodName: "Estimate",
+			Handler:    _SegmentService_Estimate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
