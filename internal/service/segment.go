@@ -8,17 +8,12 @@ import (
 	pb "app.ir/proto"
 )
 
-type SegmentService interface {
-	StoreUserSegmantation(context.Context, *pb.UserSegmantRequest) (*pb.UserSegmantResponse, error)
-	ShowUserInSegmant(context.Context, *pb.SegmantRequest) (*pb.SegmantResponse, error)
-	mustEmbedUnimplementedEstimateServer()
-}
-
 type segmentService struct {
 	repo repository.SegmentRepository
 }
 
-func NewSegmentService(repo repository.SegmentRepository) SegmentService {
+func NewSegmentService(repo repository.SegmentRepository) pb.SegmentServiceServer {
+	// func NewSegmentService(repo repository.SegmentRepository) SegmentService {
 	return &segmentService{repo}
 }
 
@@ -43,6 +38,6 @@ func (u *segmentService) ShowUserInSegmant(ctx context.Context, pb_request *pb.S
 	}, nil
 }
 
-func (u *segmentService) mustEmbedUnimplementedEstimateServer() {
+func (u *segmentService) mustEmbedUnimplementedSegmentServiceServer() {
 	fmt.Println("Need implemention")
 }

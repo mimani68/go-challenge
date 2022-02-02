@@ -13,7 +13,6 @@ import (
 	"app.ir/internal/service"
 	app "app.ir/internal/transport/grpc"
 	"app.ir/pkg/logHandler"
-	"github.com/go-delve/delve/service"
 )
 
 var (
@@ -41,5 +40,5 @@ func main() {
 
 	go job.RunJobs(cfg.Server.CronJobTime)
 
-	app.RunServer(listener, *segmentHandler)
+	app.RunServer(listener, segmentHandler)
 }

@@ -4,16 +4,14 @@ import (
 	"context"
 	"log"
 
-	"app.ir/internal/service"
 	pb "app.ir/proto"
 )
 
 type SegmentHandler struct {
-	// pb.EstimateServer
-	service.SegmentService
+	pb.SegmentServiceServer
 }
 
-func NewSegmentHandler(a service.SegmentService) *SegmentHandler {
+func NewSegmentHandler(a pb.SegmentServiceServer) pb.SegmentServiceServer {
 	return &SegmentHandler{a}
 }
 
@@ -43,4 +41,8 @@ func (s *SegmentHandler) ShowUserInSegmant(ctx context.Context, in *pb.SegmantRe
 		},
 		Success: "true",
 	}, nil
+}
+
+func (s *SegmentHandler) mustEmbedUnimplementedSegmentServiceServer() {
+	s.mustEmbedUnimplementedSegmentServiceServer()
 }
