@@ -11,6 +11,31 @@
 |container| docker |
 |orchestrator| docker-compose |
 |documentation| openAPI |
+|CICD| gitlab friendly |
+
+## Development
+### Runing dependencies easly
+
+```bash
+docker-compose -p go-challeng-infra up -d
+```
+
+### Runing application
+```bash
+go run main.go \
+  --port 3000
+```
+
+## Use in prodution
+
+```bash
+docker build -t estimate-service:1.0.0 .
+docker run \
+  --name estimate-service
+  -p 3000:3000 \
+  -v ${PWD}/config.yaml:/app/config/config.yaml \
+  estimate-service:1.0.0
+```
 
 ## Architecture
 
