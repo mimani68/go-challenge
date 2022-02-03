@@ -84,7 +84,7 @@ func (r *SegmentRepository) fetch(ctx context.Context, filter *bson.M, opts *opt
 }
 
 func (r *SegmentRepository) GetSegments(ctx context.Context, skip int64, limit int64) ([]*SegmentRepository, error) {
-	filter, opts := &bson.M{}, options.Find().SetSort(bson.M{"title": 1}).SetSkip(skip).SetLimit(limit)
+	filter, opts := &bson.M{}, options.Find().SetSort(bson.M{"segment": 1}).SetSkip(skip).SetLimit(limit)
 	data, err := r.fetch(ctx, filter, opts)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,6 @@ func (r *SegmentRepository) CreateSegment(ctx context.Context, segment domain.Se
 }
 
 func (r *SegmentRepository) CountUserInSegment(ctx context.Context, segment string) (int32, error) {
-	// number, err := r.db.Segments.Find(ctx, segment)
 	number, err := r.db.Segments.CountDocuments(ctx, bson.M{"segment": segment})
 	if err != nil {
 		return 0, err

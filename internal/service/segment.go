@@ -54,10 +54,6 @@ func (u *segmentService) ShowUserInSegment(ctx context.Context, pb_request *pb.S
 }
 
 func (u *segmentService) Estimate(ctx context.Context, pb_request *pb.SegmentRequest) (*pb.EstimateResponse, error) {
-	// result := map[string]int32{}
-	// for _, value := range db {
-	// 	result[value.Segment] += 1
-	// }
 	estimateNumber, err := u.repo.CountUserInSegment(ctx, pb_request.Segment)
 	if err != nil {
 		return &pb.EstimateResponse{
