@@ -3,12 +3,12 @@ module app.ir
 go 1.17
 
 require (
+	github.com/go-co-op/gocron v1.11.0
 	go.mongodb.org/mongo-driver v1.8.2
 	google.golang.org/grpc v1.44.0
 )
 
 require (
-	github.com/go-co-op/gocron v1.11.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
