@@ -16,14 +16,14 @@ func NewSegmentHandler(a pb.SegmentServiceServer) pb.SegmentServiceServer {
 	}
 }
 
-func (s *segmentHandler) StoreUserSegmantation(ctx context.Context, in *pb.UserSegmantRequest) (*pb.UserSegmantResponse, error) {
-	return s.srv.StoreUserSegmantation(ctx, in)
+func (s *segmentHandler) StoreUserSegmentation(ctx context.Context, in *pb.UserSegmentRequest) (*pb.UserSegmentResponse, error) {
+	return s.srv.StoreUserSegmentation(ctx, in)
 }
 
-func (s *segmentHandler) ShowUserInSegmant(ctx context.Context, in *pb.SegmantRequest) (*pb.SegmantResponse, error) {
-	return s.srv.ShowUserInSegmant(ctx, in)
+func (s *segmentHandler) ShowUserInSegment(ctx context.Context, in *pb.SegmentRequest) (*pb.SegmentResponse, error) {
+	return s.srv.ShowUserInSegment(ctx, in)
 }
 
-func (s *segmentHandler) Estimate(ctx context.Context, in *pb.SegmantRequest) (*pb.EstimateResponse, error) {
+func (s *segmentHandler) Estimate(ctx context.Context, in *pb.SegmentRequest) (*pb.EstimateResponse, error) {
 	return s.srv.Estimate(ctx, in)
 }

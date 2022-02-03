@@ -13,6 +13,7 @@ import (
 	"app.ir/internal/service"
 	"app.ir/internal/transport/grpc"
 	"app.ir/pkg/logHandler"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var (
@@ -30,7 +31,11 @@ func main() {
 		logHandler.LogError(err.Error())
 	}
 
-	client, connect, disconnect := db.Open(fmt.Sprintf("%s/%s", cfg.Database.DbUri, cfg.Database.DbName))
+	dsn := fmt.Sprintf("%s/%s?authSource=admin&connect=direct", cfg.Database.DbUri, cfg.Database.DbName)
+	client, connect, disconnect := db.Open(dsn)
+	if client.Ping(connect, &readpref.ReadPref{}) == nil {
+		logHandler.Log("[Db] Ping")
+	}
 	defer db.Close(client, connect, disconnect)
 	dbInstance := db.NewDatabase(*cfg, client.Database(cfg.Database.DbName))
 

@@ -5,32 +5,32 @@ option go_package = "proto/";
 package proto;
 
 service SegmentService {
-  rpc StoreUserSegmantation (UserSegmantRequest) returns (UserSegmantResponse) {}
-  rpc ShowUserInSegmant (SegmantRequest) returns (SegmantResponse) {}
-  rpc Estimate (SegmantRequest) returns (EstimateResponse) {}
+  rpc StoreUserSegmentation (UserSegmentRequest) returns (UserSegmentResponse) {}
+  rpc ShowUserInSegment (SegmentRequest) returns (SegmentResponse) {}
+  rpc Estimate (SegmentRequest) returns (EstimateResponse) {}
 }
 
 message User {
   string user = 1;
-  string segmant = 2;
+  string segment = 2;
 }
 
-message UserSegmantRequest {
+message UserSegmentRequest {
   string user = 1;
-  string segmant = 2;
+  string segment = 2;
   string date = 3;
 }
 
-message UserSegmantResponse {
+message UserSegmentResponse {
   bool success = 1;
   string message = 2;
 }
 
-message SegmantRequest {
-  string segmant = 1;
+message SegmentRequest {
+  string segment = 1;
 }
 
-message SegmantResponse {
+message SegmentResponse {
   bool success = 1;
   repeated User users = 2;
 }

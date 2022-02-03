@@ -26,7 +26,7 @@ type User struct {
 	unknownFields protoimpl.UnknownFields
 
 	User    string `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	Segmant string `protobuf:"bytes,2,opt,name=segmant,proto3" json:"segmant,omitempty"`
+	Segment string `protobuf:"bytes,2,opt,name=segment,proto3" json:"segment,omitempty"`
 }
 
 func (x *User) Reset() {
@@ -68,25 +68,25 @@ func (x *User) GetUser() string {
 	return ""
 }
 
-func (x *User) GetSegmant() string {
+func (x *User) GetSegment() string {
 	if x != nil {
-		return x.Segmant
+		return x.Segment
 	}
 	return ""
 }
 
-type UserSegmantRequest struct {
+type UserSegmentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	User    string `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	Segmant string `protobuf:"bytes,2,opt,name=segmant,proto3" json:"segmant,omitempty"`
+	Segment string `protobuf:"bytes,2,opt,name=segment,proto3" json:"segment,omitempty"`
 	Date    string `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
 }
 
-func (x *UserSegmantRequest) Reset() {
-	*x = UserSegmantRequest{}
+func (x *UserSegmentRequest) Reset() {
+	*x = UserSegmentRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_app_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -94,13 +94,13 @@ func (x *UserSegmantRequest) Reset() {
 	}
 }
 
-func (x *UserSegmantRequest) String() string {
+func (x *UserSegmentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserSegmantRequest) ProtoMessage() {}
+func (*UserSegmentRequest) ProtoMessage() {}
 
-func (x *UserSegmantRequest) ProtoReflect() protoreflect.Message {
+func (x *UserSegmentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_app_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -112,33 +112,33 @@ func (x *UserSegmantRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserSegmantRequest.ProtoReflect.Descriptor instead.
-func (*UserSegmantRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserSegmentRequest.ProtoReflect.Descriptor instead.
+func (*UserSegmentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_app_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *UserSegmantRequest) GetUser() string {
+func (x *UserSegmentRequest) GetUser() string {
 	if x != nil {
 		return x.User
 	}
 	return ""
 }
 
-func (x *UserSegmantRequest) GetSegmant() string {
+func (x *UserSegmentRequest) GetSegment() string {
 	if x != nil {
-		return x.Segmant
+		return x.Segment
 	}
 	return ""
 }
 
-func (x *UserSegmantRequest) GetDate() string {
+func (x *UserSegmentRequest) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
 	return ""
 }
 
-type UserSegmantResponse struct {
+type UserSegmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -147,8 +147,8 @@ type UserSegmantResponse struct {
 	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-func (x *UserSegmantResponse) Reset() {
-	*x = UserSegmantResponse{}
+func (x *UserSegmentResponse) Reset() {
+	*x = UserSegmentResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_app_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -156,13 +156,13 @@ func (x *UserSegmantResponse) Reset() {
 	}
 }
 
-func (x *UserSegmantResponse) String() string {
+func (x *UserSegmentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserSegmantResponse) ProtoMessage() {}
+func (*UserSegmentResponse) ProtoMessage() {}
 
-func (x *UserSegmantResponse) ProtoReflect() protoreflect.Message {
+func (x *UserSegmentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_app_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -174,35 +174,35 @@ func (x *UserSegmantResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserSegmantResponse.ProtoReflect.Descriptor instead.
-func (*UserSegmantResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserSegmentResponse.ProtoReflect.Descriptor instead.
+func (*UserSegmentResponse) Descriptor() ([]byte, []int) {
 	return file_proto_app_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UserSegmantResponse) GetSuccess() bool {
+func (x *UserSegmentResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
 	return false
 }
 
-func (x *UserSegmantResponse) GetMessage() string {
+func (x *UserSegmentResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
 	return ""
 }
 
-type SegmantRequest struct {
+type SegmentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Segmant string `protobuf:"bytes,1,opt,name=segmant,proto3" json:"segmant,omitempty"`
+	Segment string `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
 }
 
-func (x *SegmantRequest) Reset() {
-	*x = SegmantRequest{}
+func (x *SegmentRequest) Reset() {
+	*x = SegmentRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_app_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -210,13 +210,13 @@ func (x *SegmantRequest) Reset() {
 	}
 }
 
-func (x *SegmantRequest) String() string {
+func (x *SegmentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SegmantRequest) ProtoMessage() {}
+func (*SegmentRequest) ProtoMessage() {}
 
-func (x *SegmantRequest) ProtoReflect() protoreflect.Message {
+func (x *SegmentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_app_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -228,19 +228,19 @@ func (x *SegmantRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SegmantRequest.ProtoReflect.Descriptor instead.
-func (*SegmantRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SegmentRequest.ProtoReflect.Descriptor instead.
+func (*SegmentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_app_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SegmantRequest) GetSegmant() string {
+func (x *SegmentRequest) GetSegment() string {
 	if x != nil {
-		return x.Segmant
+		return x.Segment
 	}
 	return ""
 }
 
-type SegmantResponse struct {
+type SegmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -249,8 +249,8 @@ type SegmantResponse struct {
 	Users   []*User `protobuf:"bytes,2,rep,name=users,proto3" json:"users,omitempty"`
 }
 
-func (x *SegmantResponse) Reset() {
-	*x = SegmantResponse{}
+func (x *SegmentResponse) Reset() {
+	*x = SegmentResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_app_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -258,13 +258,13 @@ func (x *SegmantResponse) Reset() {
 	}
 }
 
-func (x *SegmantResponse) String() string {
+func (x *SegmentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SegmantResponse) ProtoMessage() {}
+func (*SegmentResponse) ProtoMessage() {}
 
-func (x *SegmantResponse) ProtoReflect() protoreflect.Message {
+func (x *SegmentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_app_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -276,19 +276,19 @@ func (x *SegmantResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SegmantResponse.ProtoReflect.Descriptor instead.
-func (*SegmantResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SegmentResponse.ProtoReflect.Descriptor instead.
+func (*SegmentResponse) Descriptor() ([]byte, []int) {
 	return file_proto_app_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SegmantResponse) GetSuccess() bool {
+func (x *SegmentResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
 	return false
 }
 
-func (x *SegmantResponse) GetUsers() []*User {
+func (x *SegmentResponse) GetUsers() []*User {
 	if x != nil {
 		return x.Users
 	}
@@ -413,19 +413,19 @@ func file_proto_app_proto_rawDescGZIP() []byte {
 var file_proto_app_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_app_proto_goTypes = []interface{}{
 	(*User)(nil),                // 0: proto.User
-	(*UserSegmantRequest)(nil),  // 1: proto.UserSegmantRequest
-	(*UserSegmantResponse)(nil), // 2: proto.UserSegmantResponse
-	(*SegmantRequest)(nil),      // 3: proto.SegmantRequest
-	(*SegmantResponse)(nil),     // 4: proto.SegmantResponse
+	(*UserSegmentRequest)(nil),  // 1: proto.UserSegmentRequest
+	(*UserSegmentResponse)(nil), // 2: proto.UserSegmentResponse
+	(*SegmentRequest)(nil),      // 3: proto.SegmentRequest
+	(*SegmentResponse)(nil),     // 4: proto.SegmentResponse
 	(*EstimateResponse)(nil),    // 5: proto.EstimateResponse
 }
 var file_proto_app_proto_depIdxs = []int32{
-	0, // 0: proto.SegmantResponse.users:type_name -> proto.User
-	1, // 1: proto.SegmentService.StoreUserSegmantation:input_type -> proto.UserSegmantRequest
-	3, // 2: proto.SegmentService.ShowUserInSegmant:input_type -> proto.SegmantRequest
-	3, // 3: proto.SegmentService.Estimate:input_type -> proto.SegmantRequest
-	2, // 4: proto.SegmentService.StoreUserSegmantation:output_type -> proto.UserSegmantResponse
-	4, // 5: proto.SegmentService.ShowUserInSegmant:output_type -> proto.SegmantResponse
+	0, // 0: proto.SegmentResponse.users:type_name -> proto.User
+	1, // 1: proto.SegmentService.StoreUserSegmentation:input_type -> proto.UserSegmentRequest
+	3, // 2: proto.SegmentService.ShowUserInSegment:input_type -> proto.SegmentRequest
+	3, // 3: proto.SegmentService.Estimate:input_type -> proto.SegmentRequest
+	2, // 4: proto.SegmentService.StoreUserSegmentation:output_type -> proto.UserSegmentResponse
+	4, // 5: proto.SegmentService.ShowUserInSegment:output_type -> proto.SegmentResponse
 	5, // 6: proto.SegmentService.Estimate:output_type -> proto.EstimateResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type
@@ -453,7 +453,7 @@ func file_proto_app_proto_init() {
 			}
 		}
 		file_proto_app_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserSegmantRequest); i {
+			switch v := v.(*UserSegmentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -465,7 +465,7 @@ func file_proto_app_proto_init() {
 			}
 		}
 		file_proto_app_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserSegmantResponse); i {
+			switch v := v.(*UserSegmentResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -477,7 +477,7 @@ func file_proto_app_proto_init() {
 			}
 		}
 		file_proto_app_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SegmantRequest); i {
+			switch v := v.(*SegmentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -489,7 +489,7 @@ func file_proto_app_proto_init() {
 			}
 		}
 		file_proto_app_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SegmantResponse); i {
+			switch v := v.(*SegmentResponse); i {
 			case 0:
 				return &v.state
 			case 1:

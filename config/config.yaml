@@ -1,5 +1,5 @@
 database:
-  uri: mongodb://localhost:27017
+  uri: mongodb://admin:simple@localhost:27017
   name: example
   collection_segments: segments
 server:

@@ -22,9 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SegmentServiceClient interface {
-	StoreUserSegmantation(ctx context.Context, in *UserSegmantRequest, opts ...grpc.CallOption) (*UserSegmantResponse, error)
-	ShowUserInSegmant(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*SegmantResponse, error)
-	Estimate(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*EstimateResponse, error)
+	StoreUserSegmentation(ctx context.Context, in *UserSegmentRequest, opts ...grpc.CallOption) (*UserSegmentResponse, error)
+	ShowUserInSegment(ctx context.Context, in *SegmentRequest, opts ...grpc.CallOption) (*SegmentResponse, error)
+	Estimate(ctx context.Context, in *SegmentRequest, opts ...grpc.CallOption) (*EstimateResponse, error)
 }
 
 type segmentServiceClient struct {
@@ -35,25 +35,25 @@ func NewSegmentServiceClient(cc grpc.ClientConnInterface) SegmentServiceClient {
 	return &segmentServiceClient{cc}
 }
 
-func (c *segmentServiceClient) StoreUserSegmantation(ctx context.Context, in *UserSegmantRequest, opts ...grpc.CallOption) (*UserSegmantResponse, error) {
-	out := new(UserSegmantResponse)
-	err := c.cc.Invoke(ctx, "/proto.SegmentService/StoreUserSegmantation", in, out, opts...)
+func (c *segmentServiceClient) StoreUserSegmentation(ctx context.Context, in *UserSegmentRequest, opts ...grpc.CallOption) (*UserSegmentResponse, error) {
+	out := new(UserSegmentResponse)
+	err := c.cc.Invoke(ctx, "/proto.SegmentService/StoreUserSegmentation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *segmentServiceClient) ShowUserInSegmant(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*SegmantResponse, error) {
-	out := new(SegmantResponse)
-	err := c.cc.Invoke(ctx, "/proto.SegmentService/ShowUserInSegmant", in, out, opts...)
+func (c *segmentServiceClient) ShowUserInSegment(ctx context.Context, in *SegmentRequest, opts ...grpc.CallOption) (*SegmentResponse, error) {
+	out := new(SegmentResponse)
+	err := c.cc.Invoke(ctx, "/proto.SegmentService/ShowUserInSegment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *segmentServiceClient) Estimate(ctx context.Context, in *SegmantRequest, opts ...grpc.CallOption) (*EstimateResponse, error) {
+func (c *segmentServiceClient) Estimate(ctx context.Context, in *SegmentRequest, opts ...grpc.CallOption) (*EstimateResponse, error) {
 	out := new(EstimateResponse)
 	err := c.cc.Invoke(ctx, "/proto.SegmentService/Estimate", in, out, opts...)
 	if err != nil {
@@ -66,9 +66,9 @@ func (c *segmentServiceClient) Estimate(ctx context.Context, in *SegmantRequest,
 // All implementations must embed UnimplementedSegmentServiceServer
 // for forward compatibility
 type SegmentServiceServer interface {
-	StoreUserSegmantation(context.Context, *UserSegmantRequest) (*UserSegmantResponse, error)
-	ShowUserInSegmant(context.Context, *SegmantRequest) (*SegmantResponse, error)
-	Estimate(context.Context, *SegmantRequest) (*EstimateResponse, error)
+	StoreUserSegmentation(context.Context, *UserSegmentRequest) (*UserSegmentResponse, error)
+	ShowUserInSegment(context.Context, *SegmentRequest) (*SegmentResponse, error)
+	Estimate(context.Context, *SegmentRequest) (*EstimateResponse, error)
 	// mustEmbedUnimplementedSegmentServiceServer()
 }
 
@@ -76,13 +76,13 @@ type SegmentServiceServer interface {
 type UnimplementedSegmentServiceServer struct {
 }
 
-func (UnimplementedSegmentServiceServer) StoreUserSegmantation(context.Context, *UserSegmantRequest) (*UserSegmantResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StoreUserSegmantation not implemented")
+func (UnimplementedSegmentServiceServer) StoreUserSegmentation(context.Context, *UserSegmentRequest) (*UserSegmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StoreUserSegmentation not implemented")
 }
-func (UnimplementedSegmentServiceServer) ShowUserInSegmant(context.Context, *SegmantRequest) (*SegmantResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ShowUserInSegmant not implemented")
+func (UnimplementedSegmentServiceServer) ShowUserInSegment(context.Context, *SegmentRequest) (*SegmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowUserInSegment not implemented")
 }
-func (UnimplementedSegmentServiceServer) Estimate(context.Context, *SegmantRequest) (*EstimateResponse, error) {
+func (UnimplementedSegmentServiceServer) Estimate(context.Context, *SegmentRequest) (*EstimateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Estimate not implemented")
 }
 func (UnimplementedSegmentServiceServer) mustEmbedUnimplementedSegmentServiceServer() {}
@@ -98,44 +98,44 @@ func RegisterSegmentServiceServer(s grpc.ServiceRegistrar, srv SegmentServiceSer
 	s.RegisterService(&SegmentService_ServiceDesc, srv)
 }
 
-func _SegmentService_StoreUserSegmantation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserSegmantRequest)
+func _SegmentService_StoreUserSegmentation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSegmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SegmentServiceServer).StoreUserSegmantation(ctx, in)
+		return srv.(SegmentServiceServer).StoreUserSegmentation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.SegmentService/StoreUserSegmantation",
+		FullMethod: "/proto.SegmentService/StoreUserSegmentation",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SegmentServiceServer).StoreUserSegmantation(ctx, req.(*UserSegmantRequest))
+		return srv.(SegmentServiceServer).StoreUserSegmentation(ctx, req.(*UserSegmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SegmentService_ShowUserInSegmant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SegmantRequest)
+func _SegmentService_ShowUserInSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SegmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SegmentServiceServer).ShowUserInSegmant(ctx, in)
+		return srv.(SegmentServiceServer).ShowUserInSegment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.SegmentService/ShowUserInSegmant",
+		FullMethod: "/proto.SegmentService/ShowUserInSegment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SegmentServiceServer).ShowUserInSegmant(ctx, req.(*SegmantRequest))
+		return srv.(SegmentServiceServer).ShowUserInSegment(ctx, req.(*SegmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _SegmentService_Estimate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SegmantRequest)
+	in := new(SegmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func _SegmentService_Estimate_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/proto.SegmentService/Estimate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SegmentServiceServer).Estimate(ctx, req.(*SegmantRequest))
+		return srv.(SegmentServiceServer).Estimate(ctx, req.(*SegmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -160,12 +160,12 @@ var SegmentService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*SegmentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "StoreUserSegmantation",
-			Handler:    _SegmentService_StoreUserSegmantation_Handler,
+			MethodName: "StoreUserSegmentation",
+			Handler:    _SegmentService_StoreUserSegmentation_Handler,
 		},
 		{
-			MethodName: "ShowUserInSegmant",
-			Handler:    _SegmentService_ShowUserInSegmant_Handler,
+			MethodName: "ShowUserInSegment",
+			Handler:    _SegmentService_ShowUserInSegment_Handler,
 		},
 		{
 			MethodName: "Estimate",

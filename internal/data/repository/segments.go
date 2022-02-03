@@ -6,8 +6,10 @@ import (
 
 	"app.ir/config"
 	"app.ir/internal/data/db"
+	"app.ir/internal/domain"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -98,10 +100,20 @@ func (r *SegmentRepository) GetSegmentById(ctx context.Context, id string) (*Seg
 	return nil, nil
 }
 
-func (r *SegmentRepository) CreateSegment(ctx context.Context, segment *SegmentRepository) (string, error) {
-	return "salam", nil
+func (r *SegmentRepository) CreateSegment(ctx context.Context, segment domain.Segment) (string, error) {
+	segment.Id = primitive.NewObjectID().Hex()
+	_, err := r.db.Segments.InsertOne(ctx, segment)
+	if err != nil {
+		return "", err
+	}
+	return segment.Id, nil
 }
 
-func (r *SegmentRepository) DeleteSegment(ctx context.Context, id string) (int64, error) {
-	return 1, nil
+func (r *SegmentRepository) CountUserInSegment(ctx context.Context, segment string) (int32, error) {
+	// number, err := r.db.Segments.Find(ctx, segment)
+	number, err := r.db.Segments.CountDocuments(ctx, bson.M{"segment": segment})
+	if err != nil {
+		return 0, err
+	}
+	return int32(number), nil
 }
